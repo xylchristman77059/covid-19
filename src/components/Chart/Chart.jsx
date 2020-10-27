@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { fetchDailyData } from '../../api';
 import { Line, Bar } from 'react-chartjs-2';
+import GoogleMapReact from 'google-map-react';
 
 import styles from './Chart.module.css';
+import googleMapReact from 'google-map-react';
 
 const Chart = ({ data: {confirmed, deaths, recovered}, country }) => {
 
@@ -66,9 +68,29 @@ const Chart = ({ data: {confirmed, deaths, recovered}, country }) => {
 	);
 
 
+	const googleMap = (
+		<div style={{ height: "100vh", width: "100%" }}>
+			<GoogleMapReact
+				bootstrapURLKeys={{ key: "AIzaSyDUstnALNSG2iskXfV1XXnHan6bav5liPg"}}
+				defaultCenter={{ lat: 20.0000, lng: -100.0000 }}
+				defaultZoom={4}
+			>
+				<div 
+					lat={38} 
+					lng={-104} 
+					style={{color: "red", width: "400px"}}
+				>
+					WE CAN DO IT !!!
+				</div>
+			</GoogleMapReact>
+		</div>
+	);
+
+	
 	return (
 		<div className={styles.container}>
-			{country ? barChart : lineChart}
+			{/* {country ? barChart : lineChart} */}
+			{country ? barChart : googleMap}
 		</div>
 	)
 }
